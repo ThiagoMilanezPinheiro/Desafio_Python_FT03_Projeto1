@@ -24,12 +24,16 @@ def get_spark(app_name: str = "seismic-pipeline") -> SparkSession:
     return configure_spark_with_delta_pip(builder).getOrCreate()
 
 
-def write_delta(df: DataFrame, path: str, partition_col: str = "event_date") -> None:
+PARTITION_COLS: list[str] = ["event_year", "event_month"]
+
+
+def write_delta(df: DataFrame, path: str, partition_cols: list[str] | None = None) -> None:
+    """Grava a camada Gold em Delta Lake (Parquet + Snappy), particionada por ano/mês."""
     (
         df.write.format("delta")
         .mode("overwrite")
         .option("compression", "snappy")
         .option("overwriteSchema", "true")
-        .partitionBy(partition_col)
+        .partitionBy(*(partition_cols or PARTITION_COLS))
         .save(path)
     )
