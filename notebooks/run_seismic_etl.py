@@ -61,12 +61,21 @@ display(spark.read.format("delta").load(os.environ["OUTPUT_PATH"]).limit(20))
 
 import shutil
 
+from src.load import write_delta
+
 if dbutils.widgets.get("EXPORT_TO_REPO") == "yes":
     dest_dir = os.path.join(repo_root, "output")
     dest_table = os.path.join(dest_dir, "delta_seismic_gold")
-    if os.path.exists(dest_table):
-        shutil.rmtree(dest_table)
-    shutil.copytree(os.environ["OUTPUT_PATH"], dest_table)
+
+    # Overwrites anteriores deixam arquivos "removidos" no disco (até um VACUUM).
+    # Para versionar só o estado atual, regrava a versão corrente numa área limpa.
+    staging = os.environ["OUTPUT_PATH"].rstrip("/") + "_export"
+    shutil.rmtree(staging, ignore_errors=True)
+    write_delta(spark.read.format("delta").load(os.environ["OUTPUT_PATH"]), staging)
+
+    shutil.rmtree(dest_table, ignore_errors=True)
+    shutil.copytree(staging, dest_table)
+    shutil.rmtree(staging, ignore_errors=True)
     shutil.copy2(os.environ["DQ_REPORT_PATH"], os.path.join(dest_dir, "dq_report.json"))
     for root, _, files in os.walk(dest_dir):
         for f in files:
