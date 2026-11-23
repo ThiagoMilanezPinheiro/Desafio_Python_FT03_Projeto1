@@ -1,0 +1,21 @@
+# Segredos
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Artefatos locais do Spark
+metastore_db/
+spark-warehouse/
+derby.log
+checkpoint/
+
+# IDE / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
