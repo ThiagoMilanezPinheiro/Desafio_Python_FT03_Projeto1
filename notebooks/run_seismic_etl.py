@@ -21,8 +21,8 @@ if repo_root not in sys.path:
 
 dbutils.widgets.text("START_DATE", "2024-01-01")
 dbutils.widgets.text("END_DATE", "2024-01-07")
-dbutils.widgets.text("OUTPUT_PATH", "/Volumes/main/seismic/gold/delta_seismic_gold")
-dbutils.widgets.text("DQ_REPORT_PATH", "/Volumes/main/seismic/gold/dq_report.json")
+dbutils.widgets.text("OUTPUT_PATH", "/Volumes/workspace/seismic/gold/delta_seismic_gold")
+dbutils.widgets.text("DQ_REPORT_PATH", "/Volumes/workspace/seismic/gold/dq_report.json")
 
 for key in ["START_DATE", "END_DATE", "OUTPUT_PATH", "DQ_REPORT_PATH"]:
     os.environ[key] = dbutils.widgets.get(key)

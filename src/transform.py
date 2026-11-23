@@ -6,12 +6,43 @@ from typing import Any
 
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql import functions as F
+from pyspark.sql.types import (
+    ArrayType,
+    DoubleType,
+    IntegerType,
+    LongType,
+    StringType,
+    StructField,
+    StructType,
+)
+
+
+GEOJSON_SCHEMA = StructType([
+    StructField("features", ArrayType(StructType([
+        StructField("id", StringType()),
+        StructField("properties", StructType([
+            StructField("mag", DoubleType()),
+            StructField("magType", StringType()),
+            StructField("place", StringType()),
+            StructField("time", LongType()),
+            StructField("tsunami", IntegerType()),
+            StructField("type", StringType()),
+        ])),
+        StructField("geometry", StructType([
+            StructField("coordinates", ArrayType(DoubleType())),
+        ])),
+    ]))),
+])
 
 
 def to_raw_df(spark: SparkSession, payloads: list[dict[str, Any]]) -> DataFrame:
-    """Bronze: um registro por resposta da API, com o array `features` aninhado."""
-    rdd = spark.sparkContext.parallelize([json.dumps(p) for p in payloads])
-    return spark.read.json(rdd)
+    """Bronze: um registro por resposta da API, com o array `features` aninhado.
+
+    Usa from_json com schema explícito (sem sparkContext), o que funciona tanto
+    no Spark local quanto no Databricks Serverless / Spark Connect.
+    """
+    raw = spark.createDataFrame([(json.dumps(p),) for p in payloads], "raw STRING")
+    return raw.select(F.from_json("raw", GEOJSON_SCHEMA).alias("j")).select("j.*")
 
 
 def build_magnitude_dim(spark: SparkSession) -> DataFrame:

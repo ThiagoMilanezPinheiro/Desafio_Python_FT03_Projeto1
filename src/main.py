@@ -26,7 +26,11 @@ def run(spark=None) -> dict:
     payloads = extract_earthquakes(settings)
 
     log.info("2/4 Transform")
-    gold = transform(spark, to_raw_df(spark, payloads)).cache()
+    gold = transform(spark, to_raw_df(spark, payloads))
+    try:
+        gold = gold.cache()  # não suportado no Databricks Serverless
+    except Exception:
+        pass
 
     log.info("3/4 Data Quality")
     report = run_checks(gold)

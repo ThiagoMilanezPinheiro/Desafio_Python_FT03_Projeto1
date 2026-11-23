@@ -21,6 +21,12 @@ except ImportError:  # no Databricks o python-dotenv pode não estar instalado
 def _get_dbutils():
     """Retorna o dbutils se estiver no Databricks, senão None."""
     try:
+        from databricks.sdk.runtime import dbutils  # type: ignore  # serverless/DBR 13+
+
+        return dbutils
+    except Exception:
+        pass
+    try:
         from pyspark.dbutils import DBUtils  # type: ignore
         from pyspark.sql import SparkSession
 
