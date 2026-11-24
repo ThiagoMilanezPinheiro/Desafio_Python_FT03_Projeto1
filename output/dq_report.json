@@ -1,0 +1,271 @@
+{
+  "generated_at": "2026-11-24T00:51:04.435810+00:00",
+  "row_count": 6265,
+  "passed": true,
+  "checks_total": 29,
+  "checks_failed": 0,
+  "checks": [
+    {
+      "check": "row_count",
+      "column": null,
+      "passed": true,
+      "value": 6265
+    },
+    {
+      "check": "schema",
+      "column": "event_id",
+      "passed": true,
+      "expected": "string",
+      "actual": "string"
+    },
+    {
+      "check": "schema",
+      "column": "event_ts",
+      "passed": true,
+      "expected": "timestamp",
+      "actual": "timestamp"
+    },
+    {
+      "check": "schema",
+      "column": "event_date",
+      "passed": true,
+      "expected": "date",
+      "actual": "date"
+    },
+    {
+      "check": "schema",
+      "column": "event_year",
+      "passed": true,
+      "expected": "int",
+      "actual": "int"
+    },
+    {
+      "check": "schema",
+      "column": "event_month",
+      "passed": true,
+      "expected": "int",
+      "actual": "int"
+    },
+    {
+      "check": "schema",
+      "column": "magnitude",
+      "passed": true,
+      "expected": "double",
+      "actual": "double"
+    },
+    {
+      "check": "schema",
+      "column": "mag_class",
+      "passed": true,
+      "expected": "string",
+      "actual": "string"
+    },
+    {
+      "check": "schema",
+      "column": "depth_km",
+      "passed": true,
+      "expected": "double",
+      "actual": "double"
+    },
+    {
+      "check": "schema",
+      "column": "latitude",
+      "passed": true,
+      "expected": "double",
+      "actual": "double"
+    },
+    {
+      "check": "schema",
+      "column": "longitude",
+      "passed": true,
+      "expected": "double",
+      "actual": "double"
+    },
+    {
+      "check": "schema",
+      "column": "tsunami",
+      "passed": true,
+      "expected": "int",
+      "actual": "int"
+    },
+    {
+      "check": "schema",
+      "column": "country_name",
+      "passed": true,
+      "expected": "string",
+      "actual": "string"
+    },
+    {
+      "check": "schema",
+      "column": "energy_joules",
+      "passed": true,
+      "expected": "double",
+      "actual": "double"
+    },
+    {
+      "check": "null_ratio",
+      "column": "event_id",
+      "passed": true,
+      "value": 0.0,
+      "threshold": 0.0
+    },
+    {
+      "check": "null_ratio",
+      "column": "event_ts",
+      "passed": true,
+      "value": 0.0,
+      "threshold": 0.0
+    },
+    {
+      "check": "null_ratio",
+      "column": "magnitude",
+      "passed": true,
+      "value": 0.0,
+      "threshold": 0.0
+    },
+    {
+      "check": "null_ratio",
+      "column": "latitude",
+      "passed": true,
+      "value": 0.0,
+      "threshold": 0.0
+    },
+    {
+      "check": "null_ratio",
+      "column": "longitude",
+      "passed": true,
+      "value": 0.0,
+      "threshold": 0.0
+    },
+    {
+      "check": "null_ratio",
+      "column": "mag_class",
+      "passed": true,
+      "value": 0.0,
+      "threshold": 0.0
+    },
+    {
+      "check": "null_ratio",
+      "column": "depth_km",
+      "passed": true,
+      "value": 0.0,
+      "threshold": 0.05
+    },
+    {
+      "check": "null_ratio",
+      "column": "country_iso3",
+      "passed": true,
+      "value": 0.0926,
+      "threshold": 0.8
+    },
+    {
+      "check": "uniqueness",
+      "column": "event_id",
+      "passed": true,
+      "total": 6265,
+      "distinct": 6265,
+      "duplicates": 0
+    },
+    {
+      "check": "range",
+      "column": "latitude",
+      "passed": true,
+      "min": -90.0,
+      "max": 90.0,
+      "violations": 0
+    },
+    {
+      "check": "range",
+      "column": "longitude",
+      "passed": true,
+      "min": -180.0,
+      "max": 180.0,
+      "violations": 0
+    },
+    {
+      "check": "range",
+      "column": "magnitude",
+      "passed": true,
+      "min": -2.0,
+      "max": 10.0,
+      "violations": 0
+    },
+    {
+      "check": "range",
+      "column": "depth_km",
+      "passed": true,
+      "min": -10.0,
+      "max": 800.0,
+      "violations": 0
+    },
+    {
+      "check": "range",
+      "column": "event_month",
+      "passed": true,
+      "min": 1,
+      "max": 12,
+      "violations": 0
+    },
+    {
+      "check": "range",
+      "column": "tsunami",
+      "passed": true,
+      "min": 0,
+      "max": 1,
+      "violations": 0
+    }
+  ],
+  "metrics": {
+    "event_ts_range": [
+      "2024-01-01 00:03:15.140000",
+      "2024-03-31 23:56:51.209000"
+    ],
+    "avg_magnitude": 3.838,
+    "max_magnitude": 7.5,
+    "significant_events": 373,
+    "country_match_rate": 0.9074,
+    "distinct_countries": 80,
+    "rows_per_partition": {
+      "2024-01": 2234,
+      "2024-02": 2130,
+      "2024-03": 1901
+    },
+    "top_countries": {
+      "United States": 2190,
+      "Japan": 383,
+      "Indonesia": 361,
+      "Puerto Rico (US)": 289,
+      "Philippines": 245,
+      "China": 184,
+      "Tonga": 170,
+      "Papua New Guinea": 156,
+      "Chile": 137,
+      "Fiji": 118
+    }
+  },
+  "execution": {
+    "parameters": {
+      "start_date": "2024-01-01",
+      "end_date": "2024-04-01",
+      "min_magnitude": 2.5,
+      "population_years": "2018:2024"
+    },
+    "sources": {
+      "usgs": "https://earthquake.usgs.gov/fdsnws/event/1/query",
+      "worldbank": "https://api.worldbank.org/v2"
+    },
+    "http": {
+      "requests": 18,
+      "retries": 0,
+      "failures": []
+    },
+    "layer_counts": {
+      "bronze_usgs_events": 6328,
+      "silver_earthquakes": 6265,
+      "silver_countries": 217,
+      "silver_population": 261
+    },
+    "output_path": "/Volumes/workspace/seismic/gold/delta_seismic_gold",
+    "duration_s": 24.6
+  }
+}
