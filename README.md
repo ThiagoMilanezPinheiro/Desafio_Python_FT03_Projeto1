@@ -105,6 +105,8 @@ No **Windows**, o Spark exige o `winutils.exe` do Hadoop: defina `HADOOP_HOME` a
 
 ## Saídas
 
+A sessão Spark é fixada em **UTC** (`spark.sql.session.timeZone`), então datas e partições não dependem do fuso da máquina: a execução local e a do Databricks produzem exatamente as mesmas partições. A escrita faz `repartition` pelas colunas de partição, gerando um arquivo Parquet por mês.
+
 ```
 output/
 ├── delta_seismic_gold/

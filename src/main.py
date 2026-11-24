@@ -14,7 +14,7 @@ from pyspark.sql import SparkSession  # noqa: E402
 
 from src.config import load_settings  # noqa: E402
 from src.extract import RateLimitedClient, extract_earthquakes, extract_worldbank  # noqa: E402
-from src.load import get_spark, write_delta  # noqa: E402
+from src.load import configure_session, get_spark, write_delta  # noqa: E402
 from src.quality import run_checks, write_report  # noqa: E402
 from src.transform import layer_counts, transform  # noqa: E402
 
@@ -26,6 +26,7 @@ def run(spark: SparkSession | None = None) -> dict[str, Any]:
     started = time.time()
     settings = load_settings()
     spark = spark or get_spark()
+    configure_session(spark)  # garante UTC também na sessão vinda do notebook
     client = RateLimitedClient(settings)
 
     log.info("1/4 Extract (USGS + World Bank)")
